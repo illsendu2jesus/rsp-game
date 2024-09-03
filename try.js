@@ -2,6 +2,8 @@
 let humanScore = 0;
 let computerScore = 0;
 
+let init = false;
+
 
 function getComputerChoice(){
     let choice = Math.random();
@@ -17,19 +19,16 @@ function getComputerChoice(){
 function evaluate(human,computer){
 
     if(human==computer){
-        console.log("Tie game");
+        
     }
     else if(human=="r"&&computer=="s" || human=="p"&&computer=="r" || human=="s"&&computer=="p" ){
-        console.log("You win!");
+
         humanScore++;
     }
     else{
-        console.log("You lose");
         computerScore++;
     }
 
-    /*let message = "You:"+humanScore+"--Computer:"+computerScore;
-    console.log(message);*/
 }
 
 
@@ -52,7 +51,6 @@ function checkScore(){
 
 
     if(humanScore==5 || computerScore == 5){
-        setTimeout(() => {console.log('jfjf')}, 8000);
         if(humanScore==5){
             message.textContent = 'you human '+text;
         }
@@ -61,8 +59,7 @@ function checkScore(){
         }
         humanScore = 0;
         computerScore = 0;
-        //displayScore();
-        //setTimeout(() => {console.log('jfjf')}, 8000);
+        init = true;
         
     }
     else{
@@ -74,17 +71,23 @@ function checkScore(){
 
 let d = document.querySelector('.buttons');
 d.addEventListener('click',(e)=>{
-    
-    let val = e.target;
-    let human = val.value;
-    let computer = getComputerChoice();
-    
-    
-    evaluate(human,computer);
-    
-    displayScore();
 
-    checkScore();
+    if(!init){
+        let val = e.target;
+        let human = val.value;
+        let computer = getComputerChoice();
+        
+        
+        evaluate(human,computer);
+
+        displayScore();
+        checkScore();
+        //init = false;
+    }
+    else{
+        displayScore();
+        init = false;
+    }
 
 }
 )
