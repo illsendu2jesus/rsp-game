@@ -4,24 +4,39 @@ let computerScore = 0;
 
 function playRound() {
 
+    let human;
+    let computer;
+
     function getComputerChoice(){
         let choice = Math.random();
         if(choice<=0.3){
-            return "rock";
+            return "r";
         }
         else if(choice>=0.6){
-            return "paper";
+            return "p";
         }
-        return "scissors";
+        return "s";
     }
     
     function getHumanChoice(){
-        let choice = prompt("choose one of the options:rock,paper or scissors:").toLowerCase();
-        return choice;
+        /*let choice = prompt("choose one of the options:rock,paper or scissors:").toLowerCase();
+        return choice;*/
+        let buttons = document.querySelector('.buttons');
+        let button;
+        buttons.addEventListener("click",(e)=>
+        {
+            button = e.target;
+            //console.log(button.value);
+            //console.log(typeof(button.value));
+            human =  button.value;
+            computer = getComputerChoice()
+        });
+        //return button;
     }
-
-    const human = getHumanChoice()[0];
-    const computer = getComputerChoice()[0];
+    while(human==undefined){
+        getHumanChoice();
+    }
+    //getHumanChoice();
 
     if(human==computer){
         console.log("Tie game");
@@ -40,10 +55,14 @@ function playRound() {
     
 }
 
-function playGame(){
-    for(let i =0;i<5;i++){
+/*function playGame(){
+    for(let i =0;i<50000;i++){
         playRound();
     }
 }
 
-playGame();
+playGame();*/
+/*while(humanScore!=5 || computerScore!=5){
+    playRound();
+}*/
+playRound();
